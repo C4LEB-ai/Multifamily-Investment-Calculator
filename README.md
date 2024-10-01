@@ -1,2 +1,2 @@
 # Multifamily Investment Calculator
- Xsite capital Investments multifamily calculator
+- details follows as soon as i'm done
