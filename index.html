@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Investment Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="calculator-container">
+        <h1>Multi-Investment Calculator</h1>
+
+        <!-- Dynamic Investment Inputs -->
+        <div id="investmentInputs"></div>
+        <button id="addInvestmentButton" class="add-button">Add Investment</button>
+
+        <!-- Shared Parameters -->
+        <div class="investment-form">
+            <div class="form-group">
+            <div id="investmentTableContainer"></div> 
+            </div>
+            <button class="calculate-button" id="calculateButton">Calculate</button>
+         </div>
+    </div>
+
+    <div class="charts-container">
+        <h2>Investment Charts</h2>
+        <canvas id="lineChart"></canvas>
+        <canvas id="barChart"></canvas>
+
+        <!-- Cards for Summary Data -->
+        <div class="card-container">
+            <div class="card">
+                <h2>Total Net Worth</h2>
+                <p id="totalNetWorth" class="number">$0</p>
+                <p>Growth over time</p>
+            </div>
+            <div class="card">
+                <h2>Total Passive Income</h2>
+                <p id="totalPassiveIncome" class="number">$0</p>
+                <p>Generated annually</p>
+            </div>
+            <div class="card">
+                <h2>Total Appreciation</h2>
+                <p id="totalAppreciation" class="number">$0</p>
+                <p>Overall property appreciation</p>
+            </div>
+            <div class="card">
+                <h2>Total Investments</h2>
+                <p id="totalInvestments" class="number">0</p>
+                <p>Investments made</p>
+            </div>
+        </div>
+        <div id="summaryTableContainer"><h2>Overall Investment Summary</h2></div>
+        </div>
+        
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
