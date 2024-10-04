@@ -62,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
         let totalAppreciationData = Array(maxYears).fill(0);
         let totalInvestments = investmentCapitals.length;
 
+        const individualNetworths = [];
+
         // Clear any previous tables
         investmentInputs.querySelectorAll('.investment-table').forEach(table => table.remove());
 
@@ -75,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const cashFlow = cashFlows[index];
                 const appreciation = appreciations[index];
 
-                const { netWorthData, passiveIncomeData, appreciationData } = calculateInvestmentData(capital, cashFlow, appreciation, startYear, holdPeriod, maxYears);
+                const { netWorthData, netWorth, passiveIncomeData, appreciationData } = calculateInvestmentData(capital, cashFlow, appreciation, startYear, holdPeriod, maxYears);
                 individualInvestmentsData.push({ label: `Investment ${index + 1}`, netWorthData });
 
                 createInvestmentTable(index + 1, netWorthData, passiveIncomeData, appreciationData, maxYears);
@@ -85,11 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     totalPassiveIncomeData[i] += passiveIncomeData[i];
                     totalAppreciationData[i] += appreciationData[i];
                 }
+                individualNetworths.push(netWorth);
+
             }
         });
 
         // Calculate totals for the cards
-        const totalNetWorth = totalNetWorthData.reduce((a, b) => a + b, 0).toFixed(2);
+        // const totalNetWorth = totalNetWorthData.reduce((a, b) => a + b, 0).toFixed(2);
+        const totalNetWorth = individualNetworths.reduce((a, b) => a + b, 0).toFixed(2);
         const totalPassiveIncome = totalPassiveIncomeData.reduce((a, b) => a + b, 0).toFixed(2);
         const totalAppreciation = totalAppreciationData.reduce((a, b) => a + b, 0).toFixed(2);
 
@@ -112,9 +117,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (existingTable) {
             existingTable.remove();  // Remove the previous table
         }
-    
+
         const years = Array.from({ length: maxYears }, (_, i) => `Year ${i + 1}`);
-    
+
         const table = document.createElement('table');
         table.classList.add('summary-table');
         table.innerHTML = `
@@ -129,16 +134,16 @@ document.addEventListener('DOMContentLoaded', function () {
             </thead>
             <tbody>
                 ${years.map((year, index) => {
-                    // For each year, calculate the capital invested only for the specific start year of each investment
-                    let capitalInvested = 0;
-                    investmentCapitals.forEach((capital, i) => {
-                        if (index + 1 === startYears[i]) {  // Only add capital for the start year
-                            capitalInvested += capital;
-                        }
-                    });
-    
-                    // Ensure data ends at the last year of the investments (startYear + holdPeriod)
-                    return `
+            // For each year, calculate the capital invested only for the specific start year of each investment
+            let capitalInvested = 0;
+            investmentCapitals.forEach((capital, i) => {
+                if (index + 1 === startYears[i]) {  // Only add capital for the start year
+                    capitalInvested += capital;
+                }
+            });
+
+            // Ensure data ends at the last year of the investments (startYear + holdPeriod)
+            return `
                         <tr>
                             <td>${year}</td>
                             <td>${capitalInvested.toFixed(2)}</td>
@@ -147,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <td>${totalNetWorthData[index].toFixed(2)}</td>
                         </tr>
                     `;
-                }).join('')}
+        }).join('')}
             </tbody>
         `;
         summaryTableContainer.appendChild(table);
@@ -171,15 +176,18 @@ document.addEventListener('DOMContentLoaded', function () {
             passiveIncomeData[index] = passiveIncome;
             appreciationData[index] = yearlyAppreciation;
 
+
             totalAppreciation += yearlyAppreciation;
         }
 
         if (startYear + holdPeriod - 1 < maxYears) {
             const finalYearIndex = startYear + holdPeriod - 2;
             netWorthData[finalYearIndex] += totalAppreciation;
+            netWorth += totalAppreciation;
         }
 
-        return { netWorthData, passiveIncomeData, appreciationData };
+        // return { netWorthData, passiveIncomeData, appreciationData };
+        return { netWorthData, passiveIncomeData, appreciationData, netWorth };
     }
 
     function createInvestmentTable(investmentNumber, netWorthData, passiveIncomeData, appreciationData, maxYears) {
@@ -187,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const table = document.createElement('table');
         table.classList.add('investment-table');
         const years = Array.from({ length: maxYears }, (_, i) => `Year ${i + 1}`);
-        
+
         table.innerHTML = `
             <thead>
                 <tr>
