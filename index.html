@@ -8,21 +8,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-<header>
-    <nav>
-        <ul class="nav-list">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#Join Community">Join Community</a></li>
-            <li><a href="#Xsite Services">XSITE Services</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-        </ul>
-    </nav>
-</header>
 
 <div class="container">
     <div class="calculator-container">
         <h1>XSITE-Investment Calculator</h1>
+        <!-- Embed Video Section -->
+        <div class="video-container">
+            <h3>Please Watch the Guide</h3>
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/6-gTxV1KgFg" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
 
         <!-- Dynamic Investment Inputs -->
         <div id="investmentInputs"></div>
@@ -36,24 +34,9 @@
             </div>
             <button class="calculate-button" id="calculateButton">Calculate</button>
             <button id="downloadReportButton" class="download-button">Download Report as PDF</button>
-
-            <!-- Embed Video Section -->
-            <div class="video-container">
-                <h3>Please Watch the Guide</h3>
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/6-gTxV1KgFg" 
-                        title="YouTube video player" frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                </iframe>
-            </div>
             </div>
     </div>
 
-    <!-- Table display -->
-    <div class="tabl-container">
-        <div id="summaryTablContainer"><h2>Individual Investment Summary</h2> </div>
-        
-    </div>
 
     <div class="charts-container">
         <h2>Investment Returns</h2>
@@ -100,6 +83,12 @@
 
         </div>
         <div id="summaryTableContainer"><h2>Overall Investment Summary</h2></div>
+    </div>
+
+    <!-- Table display -->
+    <div class="tabl-container">
+        <div id="summaryTablContainer"><h1>Individual Investment Summary</h1> </div>
+        
     </div>
 </div>
 

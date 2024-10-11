@@ -1,25 +1,27 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 300px;
-    background-image: url("assets/xsite.svg");
+    padding: 150px;
+    background-color: #616161;
     background-repeat: repeat;
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 95vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    overflow-y: auto;
+    overflow-x: auto;
 }
 
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-    max-width: 3000px;
+    grid-template-rows: repeat(auto-fill, minmax(1200px, 1fr)); /* Adjust the height of each row */
+    grid-template-columns: 1fr; /* Only one column to stack items vertically */
+    gap: 10px;
+    max-width: 1200px;
     margin: auto;
-    height: calc(95vh - 60px); 
+    /* height: calc(95vh - 60px);  */
+    overflow-y: auto; /* Allows vertical scrolling if needed */
 }
 
 /* Make individual grid containers scrollable */
@@ -200,44 +202,6 @@ table th {
     color: white;
 }
 
-/* Navigation Bar Styles */
-header {
-    background-color: #333;
-    padding: 10px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Ensures the header stays on top of other elements */
-}
-
-nav ul.nav-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-
-nav ul.nav-list li {
-    display: inline;
-}
-
-nav ul.nav-list li a {
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    display: block;
-}
-
-nav ul.nav-list li a:hover {
-    background-color: #575757;
-    border-radius: 10px;
-}
-
-/* Add padding to the body to prevent content from hiding under the fixed navbar */
 body {
     padding-top: 80px; /* Adjust this value depending on the height of the navbar */
 }
