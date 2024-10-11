@@ -36,11 +36,11 @@ document.addEventListener('DOMContentLoaded', function () {
             <input type="number" id="holdPeriod${investmentCount}" placeholder="Enter Hold period" max="30" class="investment-hold-period" required>
           </div>
           <div class="form-group">
-            <label for="cashFlow${investmentCount}">Cash Flow (%):</label>
+            <label for="cashFlow${investmentCount}">Cash Flow (5-8%):</label>
             <input type="number" id="cashFlow${investmentCount}" placeholder="Enter Cashflow 1,2,3..." max="30" class="investment-cashflow" required>
           </div>
           <div class="form-group">
-            <label for="appreciation${investmentCount}">Appreciation (%):</label>
+            <label for="appreciation${investmentCount}">Appreciation (10-20%):</label>
             <input type="number" id="appreciation${investmentCount}" placeholder="Enter Appreciation 1,2,3.." max="30" class="investment-appreciation" required>
           </div>
           <div>
