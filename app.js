@@ -4,21 +4,27 @@ let investmentCount = 0;
 document.addEventListener('DOMContentLoaded', function () {
     const investmentInputs = document.getElementById('investmentInputs');
     const addInvestmentButton = document.getElementById('addInvestmentButton');
-    const summaryTableContainer = document.getElementById('summaryTableContainer'); // Ensure this exists
+    const summaryTableContainer = document.getElementById('summaryTableContainer');
 
     // Add the first investment field on load
     addInvestmentField();
+    function getOrdinalInvestmentLabel(investmentNumber) {
+        const ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth'];
+        return ordinals[investmentNumber - 1] + ' Investment'; // Adjusting for 0-based index
+    }
 
     // Event listener for "Add Investment" button
     addInvestmentButton.addEventListener('click', addInvestmentField);
 
     function addInvestmentField() {
         investmentCount++;
+        const ordinalLabel = getOrdinalInvestmentLabel(investmentCount);
+        
         const div = document.createElement('div');
         div.classList.add('investment-form');
         div.innerHTML = `
           <div class="form-group">
-            <label for="investmentCapital${investmentCount}">Investment ${investmentCount} Capital ($):</label>
+            <label for="investmentCapital${investmentCount}" style="color: #6a0dad; font-weight: bold;">${ordinalLabel} Capital ($):</label>
             <input type="number" id="investmentCapital${investmentCount}" placeholder="Enter Amount" max="30" class="investment-capital" required>
           </div>
           <div class="form-group">
@@ -34,10 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
             <input type="number" id="cashFlow${investmentCount}" placeholder="Enter Cashflow 1,2,3..." max="30" class="investment-cashflow" required>
           </div>
           <div class="form-group">
-            <label for="appreciation${investmentCount}"> Appreciation (%):</label>
+            <label for="appreciation${investmentCount}">Appreciation (%):</label>
             <input type="number" id="appreciation${investmentCount}" placeholder="Enter Appreciation 1,2,3.." max="30" class="investment-appreciation" required>
           </div>
-          <div id="investment${investmentCount}TableContainer"><h2>Investment ${investmentCount} Summary</h2></div>`;
+          <div>
+          </div>`;
         investmentInputs.appendChild(div);
     }
 
@@ -63,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let totalInvestments = investmentCapitals.length;
 
         const individualNetworths = [];
+        let totalInvested = 0; 
 
         // Clear any previous tables
         investmentInputs.querySelectorAll('.investment-table').forEach(table => table.remove());
@@ -76,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const holdPeriod = holdPeriods[index];
                 const cashFlow = cashFlows[index];
                 const appreciation = appreciations[index];
+                totalInvested += capital;
 
                 const { netWorthData, netWorth, passiveIncomeData, appreciationData } = calculateInvestmentData(capital, cashFlow, appreciation, startYear, holdPeriod, maxYears);
                 individualInvestmentsData.push({ label: `Investment ${index + 1}`, netWorthData });
@@ -93,15 +102,17 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Calculate totals for the cards
-        // const totalNetWorth = totalNetWorthData.reduce((a, b) => a + b, 0).toFixed(2);
-        const totalNetWorth = individualNetworths.reduce((a, b) => a + b, 0).toFixed(2);
-        const totalPassiveIncome = totalPassiveIncomeData.reduce((a, b) => a + b, 0).toFixed(2);
-        const totalAppreciation = totalAppreciationData.reduce((a, b) => a + b, 0).toFixed(2);
+        
+        const totalNetWorth = individualNetworths.reduce((a, b) => a + b, 0).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        const totalAppreciation = totalAppreciationData.reduce((a, b) => a + b, 0).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        const totalPassiveIncome = (totalPassiveIncomeData.reduce((a, b) => a + b, 0)+totalAppreciationData.reduce((a, b) => a + b, 0)).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
         // Update cards
-        document.getElementById('totalNetWorth').innerText = `$${totalNetWorth}`;
-        document.getElementById('totalPassiveIncome').innerText = `$${totalPassiveIncome}`;
-        document.getElementById('totalAppreciation').innerText = `$${totalAppreciation}`;
+        document.getElementById('totalNetWorth').innerText = `${totalNetWorth}`;
+        document.getElementById('totalPassiveIncome').innerText = `${totalPassiveIncome}`;
+        document.getElementById('totalAppreciation').innerText = `${totalAppreciation}`;
+        document.getElementById('Invested').innerText = totalInvested.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        document.getElementById('cashflow').innerText = (totalPassiveIncomeData.reduce((a, b) => a + b, 0)).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
         document.getElementById('totalInvestments').innerText = totalInvestments;
 
         // Update charts
@@ -111,15 +122,21 @@ document.addEventListener('DOMContentLoaded', function () {
         createInvestmentSummaryTable(totalNetWorthData, totalAppreciationData, totalPassiveIncomeData, investmentCapitals, startYears, holdPeriods, maxYears);
     });
 
+
+    function getOrdinalInvestmentLabel(investmentNumber) {
+        const ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth'];
+        return ordinals[investmentNumber - 1] + ' Investment'; // Adjusting for 0-based index
+    }
+
+
     function createInvestmentSummaryTable(totalNetWorthData, totalAppreciationData, totalPassiveIncomeData, investmentCapitals, startYears, holdPeriods, maxYears) {
-        // Clear any existing summary table before creating a new one
         const existingTable = document.querySelector('.summary-table');
         if (existingTable) {
             existingTable.remove();  // Remove the previous table
         }
-
+    
         const years = Array.from({ length: maxYears }, (_, i) => `Year ${i + 1}`);
-
+    
         const table = document.createElement('table');
         table.classList.add('summary-table');
         table.innerHTML = `
@@ -134,25 +151,27 @@ document.addEventListener('DOMContentLoaded', function () {
             </thead>
             <tbody>
                 ${years.map((year, index) => {
-            // For each year, calculate the capital invested only for the specific start year of each investment
-            let capitalInvested = 0;
-            investmentCapitals.forEach((capital, i) => {
-                if (index + 1 === startYears[i]) {  // Only add capital for the start year
-                    capitalInvested += capital;
-                }
-            });
-
-            // Ensure data ends at the last year of the investments (startYear + holdPeriod)
-            return `
-                        <tr>
-                            <td>${year}</td>
-                            <td>${capitalInvested.toFixed(2)}</td>
-                            <td>${totalAppreciationData[index].toFixed(2)}</td>
-                            <td>${totalPassiveIncomeData[index].toFixed(2)}</td>
-                            <td>${totalNetWorthData[index].toFixed(2)}</td>
-                        </tr>
-                    `;
-        }).join('')}
+                    let capitalInvested = 0;
+                    investmentCapitals.forEach((capital, i) => {
+                        if (index + 1 === startYears[i]) {
+                            capitalInvested += capital;
+                        }
+                    });
+    
+                    // Only create rows where there's non-zero data
+                    if (capitalInvested || totalAppreciationData[index] || totalPassiveIncomeData[index] || totalNetWorthData[index]) {
+                        return `
+                            <tr>
+                                <td>${year}</td>
+                                <td>${capitalInvested.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                                <td>${totalAppreciationData[index].toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                                <td>${totalPassiveIncomeData[index].toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                                <td>${totalNetWorthData[index].toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                            </tr>
+                        `;
+                    }
+                    return ''; // Return an empty string for years with no data
+                }).join('')}
             </tbody>
         `;
         summaryTableContainer.appendChild(table);
@@ -191,11 +210,31 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function createInvestmentTable(investmentNumber, netWorthData, passiveIncomeData, appreciationData, maxYears) {
-        const container = document.getElementById(`investment${investmentNumber}TableContainer`);
+        const ordinalLabel = getOrdinalInvestmentLabel(investmentNumber);
+        const container = document.getElementById('summaryTablContainer'); // Middle grid container
+    
+        // Clear any previous table specific to this investment
+        const existingTable = container.querySelector(`.investment-table-${investmentNumber}`);
+        const existingTitle = container.querySelector(`.investment-title-${investmentNumber}`);
+        
+        if (existingTable) {
+            existingTable.remove();
+        }
+        
+        if (existingTitle) {
+            existingTitle.remove();
+        }
+    
+        // Create a new table and give it a unique class for this investment
         const table = document.createElement('table');
-        table.classList.add('investment-table');
+        table.classList.add('investment-table', `investment-table-${investmentNumber}`); // Unique class for each investment
         const years = Array.from({ length: maxYears }, (_, i) => `Year ${i + 1}`);
-
+    
+        // Create a table header with the ordinal label for the investment
+        const tableTitle = document.createElement('h2');
+        tableTitle.classList.add(`investment-title-${investmentNumber}`);
+        tableTitle.textContent = `${ordinalLabel} Summary`;
+        
         table.innerHTML = `
             <thead>
                 <tr>
@@ -206,17 +245,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 </tr>
             </thead>
             <tbody>
-                ${years.map((year, index) => `
-                    <tr>
-                        <td>${year}</td>
-                        <td>${netWorthData[index].toFixed(2)}</td>
-                        <td>${passiveIncomeData[index].toFixed(2)}</td>
-                        <td>${appreciationData[index].toFixed(2)}</td>
-                    </tr>
-                `).join('')}
+                ${years.map((year, index) => {
+                    if (netWorthData[index] || passiveIncomeData[index] || appreciationData[index]) {
+                        return `
+                            <tr>
+                                <td>${year}</td>
+                                <td>${netWorthData[index].toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                                <td>${passiveIncomeData[index].toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                                <td>${appreciationData[index].toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
+                            </tr>
+                        `;
+                    }
+                    return '';
+                }).join('')}
             </tbody>
         `;
-        container.appendChild(table);
+    
+        // Append the title and table to the middle grid container
+        container.appendChild(tableTitle); // Add the title
+        container.appendChild(table); // Add the table
     }
 
     // Initialize line and bar charts
@@ -296,7 +343,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const years = Array.from({ length: maxYears }, (_, i) => `Year ${i + 1}`);
 
         // Update line chart for total net worth and individual investments
-        lineChart.data.labels = years;
+    // Determine the last index with valid data for total net worth
+        const lastIndex = totalNetWorthData.findIndex(value => value === 0) > -1 
+            ? totalNetWorthData.findIndex(value => value === 0) - 1 
+            : totalNetWorthData.length - 1;
+
+        // Use only the years and data up to the last index with valid data
+        const relevantYears = years.slice(0, lastIndex + 1);
+        const relevantTotalNetWorthData = totalNetWorthData.slice(0, lastIndex + 1);
+        const relevantTotalPassiveIncomeData = totalPassiveIncomeData.slice(0, lastIndex + 1);
+        const relevantTotalAppreciationData = totalAppreciationData.slice(0, lastIndex + 1);
+
+        lineChart.data.labels = relevantYears;
         lineChart.data.datasets = [
             {
                 label: 'Total Net Worth',
@@ -308,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tension: 0.4
             },
             ...individualInvestmentsData.map((investment, index) => ({
-                label: investment.label,
+                label: getOrdinalInvestmentLabel(index + 1), // Use ordinal labels
                 data: investment.netWorthData,
                 borderColor: getRandomColor(),
                 fill: false,
@@ -318,9 +376,9 @@ document.addEventListener('DOMContentLoaded', function () {
         lineChart.update();
 
         // Update bar chart for passive income and appreciation
-        barChart.data.labels = years;
-        barChart.data.datasets[0].data = totalPassiveIncomeData;
-        barChart.data.datasets[1].data = totalAppreciationData;
+        barChart.data.labels = relevantYears;
+        barChart.data.datasets[0].data = relevantTotalPassiveIncomeData;
+        barChart.data.datasets[1].data = relevantTotalAppreciationData;
         barChart.update();
     }
 
@@ -333,4 +391,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return color;
     }
+    
 });
