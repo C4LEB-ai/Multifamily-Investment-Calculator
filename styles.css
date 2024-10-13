@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 150px;
+    padding: 300px;
     background-color: #616161;
     background-repeat: repeat;
     background-size: cover;
@@ -18,7 +18,7 @@ body {
     grid-template-rows: repeat(auto-fill, minmax(2000px, 1fr));
     grid-template-columns: 1fr; 
     gap: 20px;
-    max-width: 1800px;
+    max-width: 2000px;
     margin: auto;
     overflow-y: auto;
 }
