@@ -127,11 +127,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth'];
         return ordinals[investmentNumber - 1] + ' Investment'; // Adjusting for 0-based index
     }
-    
-            // refresh page
-    document.getElementById('clearButton').addEventListener('click', function () {
-        location.reload();
-    });
 
 
     function createInvestmentSummaryTable(totalNetWorthData, totalAppreciationData, totalPassiveIncomeData, investmentCapitals, startYears, holdPeriods, maxYears) {
@@ -216,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // JavaScript Part
     document.getElementById('clear').addEventListener('click', function () {
-        location.reload(); // Refreshes the page
+        location.reload();
     });
 
     function createInvestmentTable(investmentNumber, netWorthData, passiveIncomeData, appreciationData, maxYears) {
