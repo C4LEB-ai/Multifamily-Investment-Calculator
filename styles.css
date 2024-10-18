@@ -109,6 +109,26 @@ h1, h2 {
     font-size: 16px;
     border: 0.5px solid #c9c1f9;
 }
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Optional: space between the buttons */
+}
+
+.download-button, .clear-button {
+    flex: 1; /* Make both buttons occupy equal width */
+    padding: 10px;
+    background-color: #3d2f47;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.download-button:hover, .clear-button:hover {
+    background-color: #5b0099;
+}
 
 .add-button {
     width: 100%;
