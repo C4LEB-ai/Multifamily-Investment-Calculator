@@ -209,6 +209,11 @@ document.addEventListener('DOMContentLoaded', function () {
         return { netWorthData, passiveIncomeData, appreciationData, netWorth };
     }
 
+        // JavaScript Part
+    document.getElementById('clearButton').addEventListener('click', function () {
+        location.reload(); // Refreshes the page
+    });
+
     function createInvestmentTable(investmentNumber, netWorthData, passiveIncomeData, appreciationData, maxYears) {
         const ordinalLabel = getOrdinalInvestmentLabel(investmentNumber);
         const container = document.getElementById('summaryTablContainer'); // Middle grid container
