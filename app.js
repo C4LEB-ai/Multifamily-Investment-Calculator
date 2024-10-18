@@ -209,9 +209,9 @@ document.addEventListener('DOMContentLoaded', function () {
         return { netWorthData, passiveIncomeData, appreciationData, netWorth };
     }
 
-        // JavaScript Part
+        // refresh page
     document.getElementById('clearButton').addEventListener('click', function () {
-        location.reload(); // Refreshes the page
+        location.reload();
     });
 
     function createInvestmentTable(investmentNumber, netWorthData, passiveIncomeData, appreciationData, maxYears) {
