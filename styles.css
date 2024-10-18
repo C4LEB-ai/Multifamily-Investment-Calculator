@@ -255,15 +255,3 @@ table th {
 body {
     padding-top: 80px; /* Adjust this value depending on the height of the navbar */
 }
-
-/* Style for video guide */
-.video-container {
-    margin-top: 10px;
-    text-align: center;
-}
-
-.video-container video {
-    max-width: 100%;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
