@@ -56,27 +56,27 @@ document.addEventListener('DOMContentLoaded', function () {
           <div class="form-group">
             <label for="investmentCapital${investmentCount}" style="color: #6a0dad; font-weight: bold;">${ordinalLabel} Amount ($):</label>
             <input type="number" id="investmentCapital${investmentCount}" placeholder="Enter Amount" max="30" class="investment-capital" required>
-            <small><em>Please enter your first investment amount <br>(You can add multiple investments below to see your growth over time)</em></small>
+            <small><em style="font-size: 0.85em;">Please enter your first investment amount <br>(You can add multiple investments below to see your growth over time)</em></small>
           </div>
           <div class="form-group">
             <label for="startYear${investmentCount}">Year of Investment:</label>
             <input type="number" id="startYear${investmentCount}" placeholder="Enter Start Year, 1,2,..." max="30" class="investment-start-year" required>
-            <small><em>Reflects the year in which the investment was made. <br>Applicable if you invest in multiple assets over the years. <br>Example, $50k in year 1 and $50k in year 2. Use “1” if you are calculating one investment only</em></small>
+            <small><em style="font-size: 0.85em;">Reflects the year in which the investment was made. <br>Applicable if you invest in multiple assets over the years. <br>Example, $50k in year 1 and $50k in year 2. Use “1” if you are calculating one investment only</em></small>
           </div>
           <div class="form-group">
             <label for="holdPeriod${investmentCount}">Hold Period (years):</label>
             <input type="number" id="holdPeriod${investmentCount}" placeholder="Enter Hold period" max="30" class="investment-hold-period" required>
-            <small><em>Investments have a typical 5-year hold period</em></small>
+            <small><em style="font-size: 0.85em;">Investments have a typical 5-year hold period</em></small>
           </div>
           <div class="form-group">
             <label for="cashFlow${investmentCount}">Cash Flow (5-8%):</label>
             <input type="number" id="cashFlow${investmentCount}" placeholder="Enter Cashflow 1,2,3..." max="30" class="investment-cashflow" required>
-            <small><em>Average cash flow is 6%, calculated annually. Also called preferred rate of return</em></small>
+            <small><em style="font-size: 0.85em;">Average cash flow is 6%, calculated annually. Also called preferred rate of return</em></small>
           </div>
           <div class="form-group">
             <label for="appreciation${investmentCount}">Appreciation (10-20%):</label>
             <input type="number" id="appreciation${investmentCount}" placeholder="Enter Appreciation 1,2,3.." max="30" class="investment-appreciation" required>
-            <small><em>Indicates the total appreciation of the asset</em></small>
+            <small><em style="font-size: 0.85em;">Indicates the total appreciation of the asset</em></small>
           </div>
           <div>
           </div>`;
