@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Investment Calculator</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,7 +16,7 @@
 
         <!-- Dynamic Investment Inputs -->
         <div id="investmentInputs"></div>
-        <button id="addInvestmentButton" class="add-button">Add Investment</button>
+        <button id="addInvestmentButton" class="add-button">Add Investment (optional)</button>
         
 
         <!-- Shared Parameters -->
@@ -25,8 +26,8 @@
             </div>
             <button class="calculate-button" id="calculateButton">Calculate</button>
             <div class="button-container">
-                <button class="download-button">Download PDF</button>
-                <button class="clear-button"id="clear">Clear</button>
+                <button class="download-button" id="download">Download PDF</button>
+                <button class="clear-button" id="clear">Clear</button>
             </div>
             </div>
 
@@ -47,7 +48,7 @@
             </div>
 
             <div class="card">
-                <h2>Total Net Worth</h2>
+                <h2>Ending Networth</h2>
                 <p id="totalNetWorth" class="number">$0</p>
                 <p>Growth over time</p>
             </div>
