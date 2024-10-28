@@ -3,14 +3,13 @@ body {
     margin: -50px;
     padding: 10px;
     background-color: #d4d4d4;
-    background-repeat: repeat;
-    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 95vh;
-    overflow-y: auto;
-    overflow-x: auto;
+    min-height: 100vh;
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    user-select: none; 
 }
 
 .container {
@@ -19,9 +18,15 @@ body {
     grid-template-columns: 1fr;
     gap: 20px;
     max-width: 1200px;
-    margin: auto;
+    margin: 0 auto;
+    /* position: fixed; Fixes the container in the viewport */
+
+    left: 0;
+    right: 0;
+    bottom: 0;
     overflow-y: auto;
-    position: relative; /* Anchor child elements within container */
+    user-select: none; /* Prevents dragging within the grid */
+    /* pointer-events: none; Optional: Prevents dragging of any grid items */
 }
 
 .calculator-container, .charts-container, .tabl-container {
@@ -32,7 +37,8 @@ body {
     height: 100%;
     max-height: 100%;
     overflow-y: auto;
-    position: relative; /* Ensure positioned within container */
+    position: relative;
+    user-select: none; /* Prevents drag behavior */
 }
 
 /* Responsive Styles */
