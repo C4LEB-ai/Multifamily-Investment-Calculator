@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,86 +9,92 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<div class="container">
-    <div class="calculator-container">
-        <h1>XSITE-Investment Calculator</h1>
+    <div class="container">
+        <div class="calculator-container">
+            <h1>XSITE-Investment Calculator</h1>
 
-        <!-- Dynamic Investment Inputs -->
-        <div id="investmentInputs"></div>
-        <button id="addInvestmentButton" class="add-button">Add Investment (optional)</button>
-        
-
-        <!-- Shared Parameters -->
-        <div class="investment-form">
-            <div class="form-group">
-            <div id="investmentTableContainer"></div> 
-            </div>
-            <button class="calculate-button" id="calculateButton">Calculate</button>
-            <div class="button-container">
-                <button class="download-button" id="download">Download PDF</button>
-                <button class="clear-button" id="clear">Clear</button>
-            </div>
-            </div>
-
-    </div>
+            <!-- Dynamic Investment Inputs -->
+            <div id="investmentInputs"></div>
+            <button id="addInvestmentButton" class="add-button">Add Investment (optional)</button>
 
 
-    <div class="charts-container">
-        <h2>Investment Returns</h2>
-        <canvas id="lineChart"></canvas>
-        <canvas id="barChart"></canvas>
-
-        <!-- Cards for Summary Data -->
-        <div class="card-container">
-            <div class="card">
-                <h2>Total Amount Invested</h2>
-                <p id="Invested" class="number">$0</p>
-                <p>From all your investments</p>
-            </div>
-
-            <div class="card">
-                <h2>Ending Networth</h2>
-                <p id="totalNetWorth" class="number">$0</p>
-                <p>Growth over time</p>
-            </div>
-
-            <div class="card">
-                <h2>Total Passive Income</h2>
-                <p id="totalPassiveIncome" class="number">$0</p>
-                <p>Generated annually</p>
-            </div>
-
-            <div class="card">
-                <h2>Total Cashflow</h2>
-                <p id="cashflow" class="number">$0</p>
-                <p>Overall Investment Cashflow</p>
-            </div>
-
-            <div class="card">
-                <h2>Total Appreciation</h2>
-                <p id="totalAppreciation" class="number">$0</p>
-                <p>Overall property appreciation</p>
-            </div>
-
-            <div class="card">
-                <h2>Total Investments</h2>
-                <p id="totalInvestments" class="number">0</p>
-                <p>Investments made</p>
+            <!-- Shared Parameters -->
+            <div class="investment-form">
+                <div class="form-group">
+                    <div id="investmentTableContainer"></div>
+                </div>
+                <button class="calculate-button" id="calculateButton">Calculate</button>
+                <div class="button-container">
+                    <button class="download-button" id="download">Download PDF</button>
+                    <button class="clear-button" id="clear">Clear</button>
+                </div>
             </div>
 
         </div>
-        <div id="summaryTableContainer"><h2>Overall Investment Summary</h2></div>
+
+
+        <div class="charts-container">
+            <h2>Investment Returns</h2>
+            <canvas id="lineChart"></canvas>
+            <canvas id="barChart"></canvas>
+
+            <!-- Cards for Summary Data -->
+            <div class="card-container">
+                <div class="card">
+                    <h2>Total Amount Invested</h2>
+                    <p id="Invested" class="number">$0</p>
+                    <p>From all your investments</p>
+                </div>
+
+                <div class="card">
+                    <h2>Ending Networth</h2>
+                    <p id="totalNetWorth" class="number">$0</p>
+                    <p>Growth over time</p>
+                </div>
+
+                <div class="card">
+                    <h2>Total Passive Income</h2>
+                    <p id="totalPassiveIncome" class="number">$0</p>
+                    <p>Generated annually</p>
+                </div>
+
+                <div class="card">
+                    <h2>Total Cashflow</h2>
+                    <p id="cashflow" class="number">$0</p>
+                    <p>Overall Investment Cashflow</p>
+                </div>
+
+                <div class="card">
+                    <h2>Total Appreciation</h2>
+                    <p id="totalAppreciation" class="number">$0</p>
+                    <p>Overall property appreciation</p>
+                </div>
+
+                <div class="card">
+                    <h2>Total Investments</h2>
+                    <p id="totalInvestments" class="number">0</p>
+                    <p>Investments made</p>
+                </div>
+
+            </div>
+            <div id="summaryTableContainer">
+                <h2>Overall Investment Summary</h2>
+            </div>
+        </div>
+
+        <!-- Table display -->
+        <div class="tabl-container">
+            <div id="summaryTablContainer">
+                <h1>Individual Investment Summary</h1>
+            </div>
+
+        </div>
     </div>
 
-    <!-- Table display -->
-    <div class="tabl-container">
-        <div id="summaryTablContainer"><h1>Individual Investment Summary</h1> </div>
-        
-    </div>
-</div>
-
-<script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>
