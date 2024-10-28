@@ -1,295 +1,311 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: -50px;
-    padding: 10px;
-    background-color: #d4d4d4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow-y: auto; 
-    overflow-x: hidden; 
-    user-select: none; 
+  font-family: Arial, sans-serif;
+  margin: 0;
+  /* margin: -50px; */
+  padding: 10px;
+  background-color: #d4d4d4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  user-select: none;
 }
 
 .container {
-    display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    /* position: fixed; Fixes the container in the viewport */
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* position: fixed; Fixes the container in the viewport */
 
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-y: auto;
-    user-select: none; /* Prevents dragging within the grid */
-    /* pointer-events: none; Optional: Prevents dragging of any grid items */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  user-select: none; /* Prevents dragging within the grid */
+  /* pointer-events: none; Optional: Prevents dragging of any grid items */
 }
 
-.calculator-container, .charts-container, .tabl-container {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    max-height: 100%;
-    overflow-y: auto;
-    position: relative;
-    user-select: none; /* Prevents drag behavior */
+.calculator-container,
+.charts-container,
+.tabl-container {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  position: relative;
+  user-select: none; /* Prevents drag behavior */
 }
 
 /* Responsive Styles */
 @media (max-width: 1800px) {
-    .container {
-        max-width: 100%; 
-        padding: 0 20px; 
-    }
+  .container {
+    max-width: 100%;
+    padding: 0 20px;
+  }
 
-    body {
-        padding: 50px; 
-    }
+  body {
+    padding: 50px;
+  }
 
-    .calculator-container, .charts-container, .tabl-container {
-        padding: 20px; 
-    }
+  .calculator-container,
+  .charts-container,
+  .tabl-container {
+    padding: 20px;
+  }
 }
 
 @media (max-width: 768px) {
-    .container {
-        grid-template-rows: repeat(auto-fill, minmax(1200px, 1fr)); 
-        max-width: 100%;
-    }
+  .container {
+    grid-template-rows: repeat(auto-fill, minmax(1200px, 1fr));
+    /* max-width: 100%; */
+    padding: 0 10px;
+  }
 
-    .card-container {
-        grid-template-columns: 1fr; 
-    }
+  .card-container {
+    grid-template-columns: 1fr;
+  }
 
-    body {
-        padding: 30px;
-    }
+  body {
+    padding: 30px;
+  }
 
-    .form-group input {
-        width: 100%;
-    }
+  .form-group input {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
-    .container {
-        grid-template-rows: repeat(auto-fill, minmax(800px, 1fr));
-        gap: 10px; 
-    }
+  .container {
+    grid-template-rows: repeat(auto-fill, minmax(800px, 1fr));
+    gap: 10px;
+    padding: 0 5px;
+  }
 
-    body {
-        padding: 20px; 
-    }
+  body {
+    padding: 20px;
+  }
 
-    .add-button, .calculate-button {
-        padding: 8px; 
-        font-size: 14px; 
-    }
+  .add-button,
+  .calculate-button {
+    padding: 8px;
+    font-size: 14px;
+  }
 }
 
 /* Make individual grid containers scrollable */
-.calculator-container, .charts-container, .tabl-container {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    height: 100%;  /
-    max-height: 100%; 
-    overflow-y: auto;  
+.calculator-container,
+.charts-container,
+.tabl-container {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
-h1, h2 {
-    text-align: center;
-    color: #333;
+h1,
+h2 {
+  text-align: center;
+  color: #333;
 }
 
 .investment-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: light;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: light;
 }
 
 .form-group input {
-    width: 96%;
-    padding: 9px;
-    border-radius: 5px;
-    font-size: 16px;
-    border: 0.5px solid #c9c1f9;
+  width: 96%;
+  padding: 9px;
+  border-radius: 5px;
+  font-size: 16px;
+  border: 0.5px solid #c9c1f9;
 }
 .button-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px; /* Optional: space between the buttons */
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Optional: space between the buttons */
 }
 
-.download-button, .clear-button {
-    flex: 1; /* Make both buttons occupy equal width */
-    padding: 10px;
-    background-color: #3d2f47;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.download-button,
+.clear-button {
+  flex: 1; /* Make both buttons occupy equal width */
+  padding: 10px;
+  background-color: #3d2f47;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.download-button:hover, .clear-button:hover {
-    background-color: #5b0099;
+.download-button:hover,
+.clear-button:hover {
+  background-color: #5b0099;
 }
 
 .add-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .add-button:hover {
-    background-color: #218838;
+  background-color: #218838;
 }
 
 .calculate-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #6a0dad;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #6a0dad;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .calculate-button:hover {
-    background-color: #5b0099;
+  background-color: #5b0099;
 }
 
 .charts-container canvas {
-    margin-bottom: 10px;
-    border-radius: 5px;
-    padding: 0;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 0;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .card-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    grid-gap: 20px; /* Space between cards */
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  grid-gap: 20px; /* Space between cards */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .card {
-    background-color: #ffffff;
-    border: 0.5px solid #f4b6fe;
-    border-radius: 5px;
-    padding: 5px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border: 0.5px solid #f4b6fe;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    font-size: 1.0rem;
-    margin-bottom: 5px;
-    color: #4A4A4A;
+  font-size: 1rem;
+  margin-bottom: 5px;
+  color: #4a4a4a;
 }
 
 .number {
-    font-size: 1.5rem;
-    font-weight: lighter;
-    margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: lighter;
+  margin-bottom: 10px;
 }
 
 p {
-    font-size: 1.0rem;
-    margin: 10px 0;
+  font-size: 1rem;
+  margin: 10px 0;
 }
 
 .table-container {
-    grid-column: span 2;
-    background-color: #f4f4f4;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
+  grid-column: span 2;
+  background-color: #f4f4f4;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
 table {
-    width: 100%;
-    margin-top: 20px;
-    border: 0.5px solid #f4b6fe;
-    border-collapse: collapse;
-    text-align: left;
+  width: 100%;
+  margin-top: 20px;
+  border: 0.5px solid #f4b6fe;
+  border-collapse: collapse;
+  text-align: left;
 }
 
-table th, table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+table th,
+table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
 table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
+  background-color: #f4f4f4;
+  font-weight: bold;
 }
 
 .summary-table {
-    width: 100%;
-    border-collapse: collapse;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: auto;
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: auto;
 }
 
 .summary-table thead {
-    background-color: #3f51b5;
-    color: white;
-    text-align: left;
+  background-color: #3f51b5;
+  color: white;
+  text-align: left;
 }
 
-.summary-table th, .summary-table td {
-    padding: 5px 5px;
-    border: 1px solid #ddd;
-    text-align: center;
+.summary-table th,
+.summary-table td {
+  padding: 5px 5px;
+  border: 1px solid #ddd;
+  text-align: center;
 }
 
 .summary-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+  background-color: #f9f9f9;
 }
 
 .summary-table tbody tr:nth-child(odd) {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .summary-table tbody tr:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 .summary-table th {
-    background-color: #650589;
-    color: white;
+  background-color: #650589;
+  color: white;
 }
 
 body {
-    padding-top: 80px; /* Adjust this value depending on the height of the navbar */
+  /* padding-top: 80px; */
+  padding: 0;
 }
