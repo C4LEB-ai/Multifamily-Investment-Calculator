@@ -307,9 +307,9 @@ table th {
     background-color: #ffffff;
   } */
   
-  .summary-table tbody tr:hover {
+  /* .summary-table tbody tr:hover {
     background-color: #f1f1f1;
-  }
+  } */
   
   .summary-table th {
     background-color: #321b3a;
