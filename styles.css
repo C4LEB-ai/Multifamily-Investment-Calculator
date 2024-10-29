@@ -299,7 +299,12 @@ table th {
     border: 1px solid #ddd;
     text-align: center;
   }
-  
+    .investment-info {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #ffffff;
+    text-align: center;
+}
   /* .summary-table tbody tr:nth-child(even) {
     background-color: #200e0e;
   } */
