@@ -8,11 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const downloadButton = document.getElementById('download');
     if (downloadButton) {
         downloadButton.addEventListener('click', function () {
-            // Define the entire document body to convert to PDF
-            const element = document.body;
-
-            if (element) {
-                // Configuration options for html2pdf
+            if (investmentCount > 0) {
+                // Proceed with PDF generation
+                const element = document.body;
                 const options = {
                     margin: 0,
                     filename: 'Your-Investment_Summary.pdf',
@@ -22,15 +20,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         useCORS: true,
                         scrollX: 0,
                         scrollY: 0,
-                        windowWidth: document.documentElement.scrollWidth, // Set the width to match the page
+                        windowWidth: document.documentElement.scrollWidth
                     },
                     jsPDF: { unit: 'px', format: [document.documentElement.scrollWidth, document.documentElement.scrollHeight], orientation: 'portrait' }
                 };
 
-                // Generate the PDF using html2pdf
                 html2pdf().from(element).set(options).save();
             } else {
-                console.error('Element to convert to PDF not found!');
+                // Display error message if no investment has been added
+                alert("Please add at least one investment before downloading the PDF.");
             }
         });
     } else {
@@ -40,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
     addInvestmentField();
     function getOrdinalInvestmentLabel(investmentNumber) {
         const ordinals = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh', 'Twelfth'];
-        return ordinals[investmentNumber - 1] + ' Investment'; // Adjusting for 0-based index
+        return ordinals[investmentNumber - 2] + ' Investment'; // Adjusting for 0-based index
     }
 
     // Event listener for "Add Investment" button
@@ -54,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
         div.classList.add('investment-form');
         div.innerHTML = `
           <div class="form-group">
-            <label for="investmentCapital${investmentCount}" style="color: #6a0dad; font-weight: bold;">${ordinalLabel} Amount ($):</label>
+            <label for="investmentCapital${investmentCount}" style="color: #D2B383; font-weight: bold;">${ordinalLabel} Amount ($):</label>
             <input type="number" id="investmentCapital${investmentCount}" placeholder="Enter Amount" max="30" class="investment-capital" required>
             <small><em style="font-size: 0.85em;">Please enter your first investment amount <br>(You can add multiple investments below to see your growth over time)</em></small>
           </div>
@@ -385,14 +383,22 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: {
                             display: true,
                             text: 'Years'
-                        }
+                        },
+                            ticks: {
+                                color:  '#ffffff'
+                            }
+                        
                     },
                     y: {
                         beginAtZero: true,
                         title: {
                             display: true,
                             text: 'Net Worth ($)'
-                        }
+                        },
+                        ticks: {
+                            color:  '#ffffff'
+                            }
+                        
                     }
                 }
             }
@@ -419,7 +425,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 responsive: true,
                 scales: {
                     x: {
-                        stacked: true
+                        stacked: true,
+                        ticks: {
+                            color:  '#ffffff'
+                        }
                     },
                     y: {
                         stacked: true,
@@ -427,7 +436,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: {
                             display: true,
                             text: 'Amount ($)'
-                        }
+                        },
+                            ticks: {
+                                color:  '#ffffff'
+                            }
+                        
                     }
                 }
             }
