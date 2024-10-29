@@ -8,29 +8,38 @@ document.addEventListener('DOMContentLoaded', function () {
     const summaryTableContainer = document.getElementById('summaryTableContainer');
     const downloadButton = document.getElementById('download');
     if (downloadButton) {
+
         downloadButton.addEventListener('click', function () {
             if (val > 0) {
-                // Proceed with PDF generation
-                const element = document.body;
+            // Define the entire document body to convert to PDF
+            const element = document.body;
+
+            if (element) {
                 const options = {
                     margin: 0,
                     filename: 'Your-Investment_Summary.pdf',
                     image: { type: 'jpeg', quality: 0.98 },
                     html2canvas: {
-                        scale: 3,
+                        scale: 3, 
                         useCORS: true,
                         scrollX: 0,
                         scrollY: 0,
-                        windowWidth: document.documentElement.scrollWidth
+                        // Use getBoundingClientRect to get the precise width and height
+                        width: element.getBoundingClientRect().width,
+                        height: element.getBoundingClientRect().height,
                     },
-                    jsPDF: { unit: 'px', format: [document.documentElement.scrollWidth, document.documentElement.scrollHeight], orientation: 'portrait' }
+                    jsPDF: {
+                        unit: 'px',
+                        format: [element.offsetWidth, element.scrollHeight], // Use scrollHeight instead of offsetHeight
+                        orientation: 'portrait'
+                    }
                 };
 
                 html2pdf().from(element).set(options).save();
+
             } else {
-                // Display error message if no investment has been added
-                alert("Please add at least one investment before downloading the PDF.");
-            }
+                console.error('Element to convert to PDF not found!');
+            }}
         });
     } else {
         console.error('Download PDF button not found!');
@@ -63,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function addInvestmentField() {
         investmentCount++;
-        val = investmentCount-1;
         const ordinalLabel = getOrdinalInvestmentLabel(investmentCount);
 
         const div = document.createElement('div');
@@ -113,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("You must invest in at least one investment opportunity.");
             return;
         }
+        val++;
 
         let maxYears = Math.max(...startYears.map((start, index) => start + holdPeriods[index]));
         let totalNetWorthData = Array(maxYears).fill(0);
