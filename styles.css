@@ -214,6 +214,7 @@ body {
     grid-gap: 20px; /* Space between cards */
     max-width: 800px;
     margin: 0 auto;
+    justify-content: center;
     padding: 20px;
   }
   
