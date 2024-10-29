@@ -1,5 +1,6 @@
 let lineChart, barChart;
 let investmentCount = 0;
+let val = 0;
 
 document.addEventListener('DOMContentLoaded', function () {
     const investmentInputs = document.getElementById('investmentInputs');
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const downloadButton = document.getElementById('download');
     if (downloadButton) {
         downloadButton.addEventListener('click', function () {
-            if (investmentCount > 0) {
+            if (val > 0) {
                 // Proceed with PDF generation
                 const element = document.body;
                 const options = {
@@ -42,10 +43,27 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Event listener for "Add Investment" button
-    addInvestmentButton.addEventListener('click', addInvestmentField);
+    addInvestmentButton.addEventListener('click',()=>{
+        const investmentCapitals = Array.from(document.querySelectorAll('.investment-capital')).map(input => parseFloat(input.value) || 0);
+        const startYears = Array.from(document.querySelectorAll('.investment-start-year')).map(input => parseInt(input.value) || 1);
+        const holdPeriods = Array.from(document.querySelectorAll('.investment-hold-period')).map(input => parseInt(input.value) || 1);
+        const cashFlows = Array.from(document.querySelectorAll('.investment-cashflow')).map(input => parseFloat(input.value) || 0);
+        const appreciations = Array.from(document.querySelectorAll('.investment-appreciation')).map(input => parseFloat(input.value) || 0);
+
+        if (investmentCapitals.every(capital => capital === 0)) {
+            alert("Investment fields can't be empty.");
+            return;
+        }
+
+        addInvestmentField()
+    }
+    );
+
+
 
     function addInvestmentField() {
         investmentCount++;
+        val = investmentCount-1;
         const ordinalLabel = getOrdinalInvestmentLabel(investmentCount);
 
         const div = document.createElement('div');
