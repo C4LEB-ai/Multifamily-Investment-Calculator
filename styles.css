@@ -277,6 +277,7 @@ table td {
 table th {
     background-color: #6a6464;
     font-weight: bold;
+    text-align: center;
 }
   
   .summary-table {
