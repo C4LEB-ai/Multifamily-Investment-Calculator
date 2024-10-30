@@ -271,6 +271,7 @@ table th,
 table td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    text-align: center;
     color: white; /* Ensure header and cell text is white */
 }
 
@@ -285,6 +286,7 @@ table th {
     border-collapse: collapse;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    text-align: center;
     overflow: auto;
   }
   
