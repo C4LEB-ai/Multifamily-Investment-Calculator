@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <thead>
                 <tr>
                     <th>Year</th>
-                    <th>Ending Net worht($)</th>
+                    <th>Ending Net worth($)</th>
                     <th>Passive Income ($)</th>
                     <th>Appreciation ($)</th>
                 </tr>
